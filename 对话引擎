@@ -1,0 +1,19 @@
+class DialogManager:
+    def __init__(self, llm_wrapper, risk_scorer):
+        self.llm_wrapper = llm_wrapper
+        self.risk_scorer = risk_scorer
+
+    def handle_query(self, query: str) -> str:
+        """
+        #处理用户查询并生成响应。
+        :param query: 用户输入的自然语言查询
+        :return: 生成的响应
+        """
+        # 示例：处理流动性风险查询
+        if "liquidity risk" in query.lower():
+            response = self.llm_wrapper.generate_response(
+                f"Explain the current liquidity risk based on the following query:\n{query}"
+            )
+        else:
+            response = self.llm_wrapper.generate_response(query)
+        return response
